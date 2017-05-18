@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 from tinydb import TinyDB, Query
 db = TinyDB('db.json')
 crddb = TinyDB('crddb.json')

@@ -39,3 +39,4 @@ for item in coordinate_entries:
         print "                          | Wind = " + item['W'] + " km\hr " + direction
         print "-------------------------------------------------"
 
+

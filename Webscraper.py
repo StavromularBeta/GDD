@@ -6,7 +6,7 @@ from tinydb import TinyDB
 import Webscraper_functions as ff
 
 
-db = TinyDB('db.json')
+db = TinyDB('onedb.json')
 
 page = requests.get('http://www.victoriaweather.ca/all_current_data.php')
 tree = html.fromstring(page.content)

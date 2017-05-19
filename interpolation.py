@@ -10,7 +10,7 @@ coordinates = coordinate_entries.all()
 for item in coordinates:
     namelist.append(item['name'])
 
-temperature_entries = TinyDB('db.json')
+temperature_entries = TinyDB('onedb.json')
 entry = Query()
 counter = 0
 t_points = []
@@ -19,6 +19,8 @@ t_values = []
 for name in namelist:
     one_temp_entry = temperature_entries.get(entry.name == name)
     if one_temp_entry['T'] == "----":
+        pass
+    elif one_temp_entry['T'] == "---":
         pass
     else:
         t_points.append(one_temp_entry['name'])
@@ -40,9 +42,10 @@ for item in t_points:
 
 coordarray = np.array(t_coords)
 valuearray = np.array(t_values)
-lat, long = np.mgrid[48.7:48.4:1000j, 236.4:237.153:1000j]\
+lat, long = np.mgrid[233:237:2000j, 50.5:48:2000j]
 
-z = griddata(coordarray, valuearray, (lat, long), method='nearest')
-plt.imshow(z.T, extent=(236.448,237.153,48.3,48.7))
+z = griddata(coordarray, valuearray, (long, lat), method='linear')
+plt.imshow(z.T, extent=(233,237,48,50.5), origin="upper")
 plt.colorbar()
-plt.show()
+plt.scatter(coordarray[:,1], coordarray[:,0], s=0.1, alpha = 0.5)
+plt.savefig('interpolation.png', dpi=1000)
